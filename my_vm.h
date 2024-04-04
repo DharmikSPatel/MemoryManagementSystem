@@ -1,6 +1,6 @@
 #include <stddef.h>
 
-#define MAX_MEMSIZE (1UL<<32)
+#define MAX_MEMSIZE (1ULL<<32)
 #define MEMSIZE (1UL<<30)
 #define TLB_ENTRIES 256
 #define PAGE_SIZE (8192)  //8K = 8192 
