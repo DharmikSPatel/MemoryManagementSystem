@@ -15,4 +15,4 @@ my_vm.a: my_vm.o bitmap.o
 	$(RANLIB) $@
 
 clean:
-	rm -rf *.o *.a my_vm bitmap bitmap_test vm_test TLB
+	rm -rf *.o *.a my_vm bitmap bitmap_test vm_test my_vm.dSYM vm_test.dSYM bitmap_test.dSYM
