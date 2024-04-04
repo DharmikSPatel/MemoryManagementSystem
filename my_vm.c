@@ -164,7 +164,7 @@ unsigned int calculate_amount_pages_needed(size_t n){
 }
 void * t_malloc(size_t n){
     unsigned int pages_needed = calculate_amount_pages_needed(n);
-    // printf("Amount Of Pages Needed |%u| for |%d|Bytes\n", pages_needed, n);
+    //printf("Amount Of Pages Needed |%u| for |%d|Bytes\n", pages_needed, n);
     unsigned int v_page_num_start = next_n_free_pages(v_bitmap, pages_needed);
     if(v_page_num_start == 0){
         printf("Not Enough Virtual Pages\n");

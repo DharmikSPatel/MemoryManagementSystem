@@ -98,7 +98,9 @@ void test_matmult(int l, int m, int n){
 int main(int argc, char const *argv[])
 {
     set_physical_mem();
+    printVABreakdown();
     test_matmult(2, 2, 2);
+    test_matmult(256, 256, 256);
     print_TLB_missrate();
     return 0;
 }

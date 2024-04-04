@@ -8,7 +8,8 @@
 #define ELEM_SIZE (sizeof(int)) //for matmul
 
 void set_physical_mem();
-
+void printVABreakdown();
+void debug_va(unsigned int vp);
 void * translate(unsigned int vp);
 
 unsigned int page_map(unsigned int vp);
