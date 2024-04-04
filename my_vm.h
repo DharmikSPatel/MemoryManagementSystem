@@ -3,7 +3,9 @@
 #define MAX_MEMSIZE (1UL<<32)
 #define MEMSIZE (1UL<<30)
 #define TLB_ENTRIES 256
-
+#define PAGE_SIZE (8192)  //8K = 8192 
+#define PTE_SIZE 4 //4 Byte so use usigned int for indexing into pages. can represent 2^32 values
+#define ELEM_SIZE (sizeof(int)) //for matmul
 
 void set_physical_mem();
 
@@ -26,3 +28,5 @@ void add_TLB(unsigned int vpage, unsigned int ppage);
 int check_TLB(unsigned int vpage);
 
 void print_TLB_missrate();
+
+unsigned int index_into(unsigned int matrix, int i, int j, int num_cols);

@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "my_vm.h": "c",
+        "stddef.h": "c",
+        "complex": "c",
+        "stdio.h": "c",
+        "string.h": "c",
+        "bitmap.h": "c",
+        "ratio": "c",
+        "__tuple": "c",
+        "array": "c",
+        "stdlib.h": "c"
+    }
+}
