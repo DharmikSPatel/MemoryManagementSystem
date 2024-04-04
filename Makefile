@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -lm -m32
+CFLAGS = -g -m32 -lm #if on 64 bit machine, remove -m32 and -lm
 TESTFLAGS = $(CFLAGS) -std=c99 -Wall -fsanitize=address,undefined 
 AR = ar -rc
 RANLIB = ranlib
