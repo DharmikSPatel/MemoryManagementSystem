@@ -16,9 +16,7 @@ typedef struct TLBEntry
     unsigned int ppage;
 }tlb_entry;
 
-void print_tlb_entry(tlb_entry* entry){
-    printf("vpage |%u| -> ppage |%u|\n", entry->vpage, entry->ppage);
-}
+
 
 char* physical_mem = NULL;
 struct bitmap* p_bitmap = NULL;
@@ -26,8 +24,8 @@ struct bitmap* v_bitmap = NULL;
 unsigned int* l1_table = NULL;
 int numOfVAdrrBits;
 int numOfLevel1Bits;
-int numOfLevel2Bits; //num of bits to index into 
-int numOfOffsetBits; //num of bits to index into a page of size of PAGE_SIZE
+int numOfLevel2Bits; 
+int numOfOffsetBits;
 int numOfVPNumBits;
 
 unsigned int tlb_access_amount = 0;
@@ -35,6 +33,20 @@ unsigned int tlb_succes_amount = 0;
 unsigned int tlb_miss_amount = 0;
 
 tlb_entry* TLB[TLB_ENTRIES]; 
+
+void print_tlb_entry(tlb_entry* entry){
+    printf("vpage |%u| -> ppage |%u|\n", entry->vpage, entry->ppage);
+}
+
+//used to print first n tlb entries
+void printTLB(unsigned int n){
+    printf("-----\n");
+    printf("Printing TLB\n");
+    for(int i = 0; i < n; i++){
+        print_tlb_entry(TLB[i]);
+    }
+    printf("-----\n");
+}
 
 void set_physical_mem(){
     physical_mem = (char*)malloc(MEMSIZE);
@@ -95,18 +107,7 @@ void debug_va(unsigned int vp){
     printf("physical adress: |%p|\n", translate(vp));
     printf("----\n");
 }
-//used to print first n tlb entries
-void printTLB(unsigned int n){
-    printf("-----\n");
-    printf("Printing TLB\n");
-    for(int i = 0; i < n; i++){
-        print_tlb_entry(TLB[i]);
-    }
-    printf("-----\n");
-}
 void * translate(unsigned int vp){
-    unsigned int l1Index = (vp & L1BITMASK) >> (numOfVAdrrBits - numOfLevel1Bits);
-    unsigned int l2Index = (vp & L2BITMASK) >> (numOfVAdrrBits - numOfLevel1Bits - numOfLevel2Bits);
     unsigned int offset = (vp & OFFSETBITMASK);
     unsigned int vpage_num = (vp & VPAGENUMBITMASK) >> (numOfOffsetBits);
     unsigned int page_num_bp;
@@ -114,6 +115,8 @@ void * translate(unsigned int vp){
         page_num_bp = TLB[vpage_num % TLB_ENTRIES]->ppage;
     } else {
         //else walk the page table 
+        unsigned int l1Index = (vp & L1BITMASK) >> (numOfVAdrrBits - numOfLevel1Bits);
+        unsigned int l2Index = (vp & L2BITMASK) >> (numOfVAdrrBits - numOfLevel1Bits - numOfLevel2Bits);
         unsigned int page_num_l2Table = l1_table[l1Index];
         unsigned int* l2_table = (unsigned int*)(physical_mem + page_num_l2Table * PAGE_SIZE);        
         page_num_bp = l2_table[l2Index];

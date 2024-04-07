@@ -99,8 +99,7 @@ int main(int argc, char const *argv[])
 {
     set_physical_mem();
     printVABreakdown();
-    test_matmult(2, 2, 2);
-    test_matmult(256, 256, 256);
+    test_matmult(10, 10, 12);
     print_TLB_missrate();
     return 0;
 }

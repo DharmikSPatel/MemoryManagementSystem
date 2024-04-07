@@ -4,7 +4,7 @@
 #define MEMSIZE (1UL<<30)
 #define TLB_ENTRIES 256
 #define PAGE_SIZE (8192)  //8K = 8192 
-#define PTE_SIZE 4 //4 Byte so use usigned int for indexing into pages. can represent 2^32 values
+#define PTE_SIZE 4 //4 Bytes so use usigned int for indexing into pages.
 #define ELEM_SIZE (sizeof(int)) //for matmul
 
 void set_physical_mem();
